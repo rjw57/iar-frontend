@@ -1,12 +1,10 @@
 // eslint-disable-next-line
 import React, {Component} from 'react'; // used implicitly by JSX
 import PropTypes from 'prop-types';
-import AssetListItem from '../components/AssetListItem';
 import AssetListHeader from '../components/AssetListHeader';
 import AssetTable from '../components/AssetTable';
 import Page from '../containers/Page';
-import { connect } from 'react-redux';
-import { getAssetList } from '../redux/actions';
+import GetMoreAssets from '../components/GetMoreAssets';
 
 import '../style/App.css';
 
@@ -15,34 +13,22 @@ const TITLES = {
   '/assets/all': 'Assets: All',
 };
 
+const AssetList = ({ match }) => (
+  <Page>
+    <AssetListHeader title={TITLES[match.url]} />
 
-class AssetList extends React.Component {
-  componentDidMount() {
-    this.props.getAssetList();
-  }
+    {/* Table of currently loaded assets. */}
+    <AssetTable />
 
-  render() { return (
-    <Page>
-      <AssetListHeader title={TITLES[this.props.match.url]} />
-      <AssetTable>{
-        this.props.assetList.map( asset => (
-          <AssetListItem key={asset.url} asset={asset} />
-        ))
-      }
-      </AssetTable>
-    </Page>);
-  }
-};
+    <div style={{textAlign: 'center'}}>
+      {/* When this component becomes visible more assets are loaded to populate the table. */}
+      <GetMoreAssets />
+    </div>
+  </Page>
+);
 
 AssetList.propTypes = {
-  assetList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getAssetList: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ iarApi }) => ({
-  assetList: iarApi.assets.results
-});
-
-const mapDispatchToProps = { getAssetList };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AssetList);
+export default AssetList;

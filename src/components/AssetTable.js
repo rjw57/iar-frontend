@@ -7,8 +7,13 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
+import AssetListItem from '../components/AssetListItem';
+import { connect } from 'react-redux';
 
-const AssetTable = ({ children }) => (
+/**
+ * A table showing the assets currently in the asset summary table. 
+ */
+const AssetTable = ({ assetSummaries }) => (
   <div className="Asset-table">
     <Table
       fixedHeader={true}
@@ -32,14 +37,18 @@ const AssetTable = ({ children }) => (
         displayRowCheckbox={false}
         className="Asset-table-body"
       >
-      { children }
+        { assetSummaries.map(asset => <AssetListItem key={asset.url} assetUrl={asset.url} />) }
       </TableBody>
     </Table>
   </div>
 );
 
 AssetTable.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element)
+  assetSummaries: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default AssetTable;
+const mapStateToProps = ({ iarApi }) => ({
+  assetSummaries: iarApi.assets.summaries,
+});
+
+export default connect(mapStateToProps)(AssetTable);
