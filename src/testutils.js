@@ -7,6 +7,7 @@ import localStorage from 'mock-local-storage';
 import configureMockStore from 'redux-mock-store';
 import { middlewares } from './redux/enhancer';
 import { initialState as iarApiInitialState } from './redux/reducers/assetRegisterApi';
+import { initialState as deleteConfirmationInitialState } from './redux/reducers/deleteConfirmation';
 
 import './test/mock-localstorage.js';
 
@@ -15,6 +16,7 @@ export const mockStore = configureMockStore(middlewares);
 export const DEFAULT_INITIAL_STATE = {
   auth: { isLoggedIn: true },
   iarApi: iarApiInitialState,
+  deleteConfirmation: deleteConfirmationInitialState,
 };
 
 /*
