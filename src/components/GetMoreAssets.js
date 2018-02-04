@@ -38,4 +38,9 @@ const mapStateToProps = ({ iarApi }) => ({
 
 const mapDispatchToProps = { getMoreAssets };
 
+/**
+ * An GetMoreAssets which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedGetMoreAssets = GetMoreAssets;
+
 export default connect(mapStateToProps, mapDispatchToProps)(GetMoreAssets);

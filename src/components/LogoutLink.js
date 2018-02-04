@@ -18,4 +18,9 @@ LogoutLink.propTypes = {
 
 const mapDispatchToProps = { logout };
 
+/**
+ * A LogoutLink which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedLogoutLink = LogoutLink;
+
 export default connect(null, mapDispatchToProps)(LogoutLink);

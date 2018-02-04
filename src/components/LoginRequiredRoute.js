@@ -43,4 +43,9 @@ const mapStateToProps = ({ auth }) => ({
   isLoggedIn: auth.isLoggedIn
 });
 
+/**
+ * A LoginRequiredRoute which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedLoginRequiredRoute = LoginRequiredRoute;
+
 export default connect(mapStateToProps)(LoginRequiredRoute);

@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
  *
  * The unconnected component is exported by name.
  */
-export const AssetTable = ({ assetSummaries, isLoadingAssets = false }) => (
+const AssetTable = ({ assetSummaries, isLoadingAssets = false }) => (
   <div className="Asset-table">
     <Table
       fixedHeader={true}
@@ -70,5 +70,10 @@ const mapStateToProps = ({ iarApi }) => ({
   assetSummaries: iarApi.assets.summaries,
   isLoadingAssets: iarApi.assets.isLoading,
 });
+
+/**
+ * An AssetTable which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedAssetTable = AssetTable;
 
 export default connect(mapStateToProps)(AssetTable);

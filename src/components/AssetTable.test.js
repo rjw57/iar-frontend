@@ -6,7 +6,7 @@ import React from 'react';
 jest.mock('./AssetListItem', () => () => <div />);
 
 import TestRenderer from 'react-test-renderer';
-import { AssetTable, ZeroAssetsRow } from './AssetTable';
+import { UnconnectedAssetTable as AssetTable, ZeroAssetsRow } from './AssetTable';
 import AssetListItem from './AssetListItem';
 import { render } from '../testutils';
 

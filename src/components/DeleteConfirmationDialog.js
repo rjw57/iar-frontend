@@ -38,4 +38,9 @@ const mapStateToProps = ({ iarApi, deleteConfirmation }) => ({
 
 const mapDispatchToProps = { deleteAsset, handleConfirmDelete };
 
+/**
+ * An DeleteConfirmationDialog which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedDeleteConfirmationDialog = DeleteConfirmationDialog;
+
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteConfirmationDialog);

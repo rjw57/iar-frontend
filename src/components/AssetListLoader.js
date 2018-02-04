@@ -26,4 +26,9 @@ const mapStateToProps = ({ iarApi }) => ({
 
 const mapDispatchToProps = { getAssetList };
 
+/**
+ * An AssetListLoader which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedAssetListLoader = AssetListLoader;
+
 export default connect(mapStateToProps, mapDispatchToProps)(AssetList);

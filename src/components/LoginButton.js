@@ -28,4 +28,9 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = { login, logout };
 
+/**
+ * An LoginButton which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedLoginButton = LoginButton;
+
 export default connect(mapStateToProps, mapDispatchToProps)(LoginButton);

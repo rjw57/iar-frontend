@@ -10,7 +10,7 @@ import {TableRow, TableRowColumn} from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
 import TickIcon from 'material-ui/svg-icons/action/done';
 
-const AssetListItem = ({assetUrl, assetsByUrl, confirmDelete}) => {
+export const AssetListItem = ({assetUrl, assetsByUrl, confirmDelete}) => {
   const asset = assetsByUrl ? assetsByUrl[assetUrl] : null;
   if(!asset) {
     console.error('Asset ' + assetUrl + ' could not be found in assetsByUrl');
@@ -41,5 +41,10 @@ const mapStateToProps = ({ iarApi }) => ({
 });
 
 const mapDispatchToProps = { confirmDelete };
+
+/**
+ * An AssetListItem which is not connected to the redux store. Useful for testing.
+ */
+export const UnconnectedAssetListItem = AssetListItem;
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetListItem);
