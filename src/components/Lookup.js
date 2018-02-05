@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {AutoComplete} from 'material-ui';
 import _ from "underscore";
 import config from '../config';
+import { connect } from 'react-redux';
 
 const ENDPOINT_SEARCH = config.ENDPOINT_LOOKUP + 'search';
 
@@ -28,14 +29,43 @@ class Lookup extends Component {
   }
 
   /*
+  Wrapper for fetch() that handles errors / unmarshalls JSON
+   */
+  fetch(url, options, cb) {
+    const { token } = this.props;
+
+    if(token) {
+      if (options.headers) {
+        options.headers.append('Authorization', 'Bearer ' + token);
+      } else {
+        options['headers'] = new Headers({
+          'Authorization': 'Bearer ' + token
+        });
+      }
+    }
+
+    fetch(url, options).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        // TODO: error
+        //this.props.handleMessage('Network Error: ' + response.statusText)
+      }
+    }).then(data => data && cb(data)).catch(
+      // TODO: error
+      // error => this.props.handleMessage('Network Error: ' + error)
+    );
+  }
+
+  /*
   Fetch the owner's name for the lookup API.
    */
   componentWillReceiveProps(nextProps) {
-      if (nextProps.value) {
-        this.props.fetch(ENDPOINT_PEOPLE + nextProps.value, {}, data => {
-          this.setState({displayName: data.visibleName})
-        });
-      }
+    if(nextProps.value && (this.props !== nextProps.value)) {
+      this.fetch(ENDPOINT_PEOPLE + nextProps.value, {}, data => {
+        this.setState({displayName: data.visibleName})
+      });
+    }
   }
 
   /*
@@ -57,10 +87,9 @@ class Lookup extends Component {
    */
   fetchMatchingUsers(searchText) {
     // TODO (include CRSID in display name)
-    let self = this;
-    this.props.fetch(
+    this.fetch(
       ENDPOINT_SEARCH + "?limit=10&query=" + encodeURIComponent(searchText), {},
-      data => self.setState({matchingUsers: data.results})
+      data => this.setState({matchingUsers: data.results})
     );
   }
 
@@ -80,4 +109,6 @@ class Lookup extends Component {
   };
 }
 
-export default Lookup
+const mapStateToProps = ({ auth: { token } }) => ({ token });
+
+export default connect(mapStateToProps)(Lookup);

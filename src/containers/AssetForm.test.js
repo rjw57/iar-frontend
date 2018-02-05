@@ -16,7 +16,7 @@ const NEW_ASSET_FIXTURE = {
   department: 'Medicine',
   purpose: 'Medical Research',
   research: true,
-  owner: 'mb2174',
+  owner: 'spqr2',
   private: true,
   personal_data: true,
   data_subject: [ 'patients' ],
@@ -42,10 +42,10 @@ fetch_mock.get('http://localhost:8000/assets/', {
   next: null, previous: null, results: [ ASSET_FIXTURE ],
 });
 
-fetch_mock.get('http://localhost:8080/people/crsid/mb2174', {
-  url: "http://localhost:8080/people/crsid/mb2174",
-  identifier: {"scheme": "crsid", "value": "mb2174"},
-  visibleName: "M. Bamford",
+fetch_mock.get('http://localhost:8080/people/crsid/spqr2', {
+  url: "http://localhost:8080/people/crsid/spqr2",
+  identifier: {"scheme": "crsid", "value": "spqr2"},
+  visibleName: "J. Caesar",
 });
 
 /*
@@ -55,7 +55,7 @@ test('can route /asset/create', () => {
 
   const testInstance = render(<AppRoutes/>, {url: '/asset/create'});
 
-  expect(testInstance.findByType(AppBar).props.title).toBe('Create new asset')
+  expect(testInstance.findByType(AppBar).props.title).toBe('Creating: Untitled asset')
 });
 
 /*
