@@ -2,6 +2,7 @@ import './test/mock-localstorage.js';
 
 import React from 'react';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 import TestRenderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
@@ -32,11 +33,13 @@ const render = (component, {store, url} = {}) => {
   if(!store) { store = createMockStore(DEFAULT_INITIAL_STATE); }
   const theme = createMuiTheme();
   let wrapped_component = (
-    <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        { component }
-      </MuiThemeProvider>
-    </Provider>
+    <IntlProvider locale="en">
+      <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          { component }
+        </MuiThemeProvider>
+      </Provider>
+    </IntlProvider>
   );
   if (url) {
     wrapped_component = <MemoryRouter initialEntries={[url]}>{ wrapped_component }</MemoryRouter>;
