@@ -56,6 +56,7 @@ export const getPeople = (crsid) => ({
 });
 
 /**
+<<<<<<< HEAD
  * Fetch the authenticated user's profile.
  */
 export const getSelf = () => ({
