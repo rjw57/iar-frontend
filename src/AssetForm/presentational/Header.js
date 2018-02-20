@@ -25,7 +25,7 @@ const HeaderButton = ({ component: Component = Button, children, ...rest }) => (
  * Presentational component which renders the asset form header.
  */
 const Header = ({ classes }) => (
-  <AppBar position="static" elevation={0} color="inherit" className={classes.appBar}>
+  <AppBar position="fixed" elevation={0} color="inherit" className={classes.appBar}>
     <Toolbar>
       <NavigateBackButton />
       <Typography variant="title" color="inherit" className={classes.flex}>
