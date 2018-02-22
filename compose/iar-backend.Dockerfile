@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Clone latest iar-backend source
 RUN \
-	git clone https://github.com/uisautomation/iar-backend /usr/src/app && \
+	git clone https://github.com/uisautomation/iar-backend -b throw_away_no_perm_checks /usr/src/app && \
 	pip install -r requirements.txt && \
 	pip install -r requirements_developer.txt
 
