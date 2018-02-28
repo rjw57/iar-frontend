@@ -6,7 +6,9 @@ import { IntlProvider } from 'react-intl';
 import { DeleteConfirmationDialog, FetchSelf, ScrollToTop, Snackbar } from '../components';
 import PropTypes from 'prop-types';
 import AppRoutes from './AppRoutes';
+import TokenTimeout from './TokenTimeout';
 import FetchLookupInstitutions from '../components/FetchLookupInstitutions';
+import TimeoutDialog from '../components/TimeoutDialog';
 import theme from '../style/CustomMaterialTheme';
 import '../style/App.css';
 
@@ -22,12 +24,14 @@ const App = ({ store }) => (
     <IntlProvider locale={navigator.language}>
       <ReduxProvider store={ store }>
         <div>
+          <TokenTimeout />
           <Router basename={basename}>
             <ScrollToTop>
               <AppRoutes />
             </ScrollToTop>
           </Router>
           <DeleteConfirmationDialog />
+          <TimeoutDialog />
           <Snackbar />
           <FetchSelf />
           <FetchLookupInstitutions />
